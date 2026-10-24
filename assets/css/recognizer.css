@@ -1,0 +1,736 @@
+/* Design box 920x640 (ScaleWithScreenSize). The drawing area is placed absolutely and must match kDrawArea in game.cpp:
+   x = 16 padding, y = 44 tab bar + 16 padding + 28 title + 12 gap. */
+
+Canvas {
+  background: #f8fafc;
+}
+
+/* Not positioned, so .draw-area resolves against the canvas itself, not the padded content box. */
+.root {
+  width: 100%;
+  height: 100%;
+}
+
+/* 44 tall: the .draw-area top below counts it. */
+.tabbar {
+  width: 100%;
+  height: 44;
+  padding: 8 16 0 16;
+  gap: 8;
+  background: #ffffff;
+}
+
+.tab-slot {
+  width: 136;
+}
+
+.lang-slot {
+  width: 48;
+}
+
+.tab-spacer {
+  flex-grow: 1;
+  height: 1;
+}
+
+Button.tab {
+  width: 100%;
+  height: 33;
+  background: #00000000;
+  border-radius: 0;
+  font-size: 15;
+}
+
+Button.tab:hover {
+  background: #f1f5f9;
+}
+
+.tab-line {
+  width: 100%;
+  height: 3;
+  background: #2563eb;
+}
+
+.screen {
+  width: 100%;
+  padding: 16;
+  gap: 24;
+}
+
+.column {
+  gap: 12;
+}
+
+.w240 {
+  width: 240;
+}
+
+.w280 {
+  width: 280;
+}
+
+.w320 {
+  width: 320;
+}
+
+.w584 {
+  width: 584;
+}
+
+.w260 {
+  width: 260;
+}
+
+.title {
+  height: 28;
+  font-size: 20;
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+.group {
+  width: 100%;
+  gap: 8;
+  padding: 10;
+  background: #ffffff;
+  border-width: 1;
+  border-color: #e2e8f0;
+  border-radius: 6;
+}
+
+.group-title {
+  font-size: 13;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.text {
+  font-size: 14;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.hint {
+  width: 100%;
+  font-size: 11;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.small {
+  width: 100%;
+  font-size: 12;
+  color: #334155;
+}
+
+/* Along the bottom of the window, whichever tab is shown. */
+.status {
+  position: absolute;
+  left: 16;
+  top: 614;
+  width: 888;
+  font-size: 12;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.param-row {
+  gap: 8;
+  align-items: center;
+}
+
+.param-label {
+  width: 72;
+  font-size: 14;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.param-value {
+  width: 40;
+  font-size: 14;
+  color: #0f172a;
+  text-align: center;
+}
+
+Button {
+  height: 32;
+  padding: 0 12;
+  font-size: 14;
+  color: #0f172a;
+  background: #e2e8f0;
+  border-radius: 6;
+  text-align: center;
+  align-items: center;
+}
+
+Button:hover {
+  background: #cbd5e1;
+}
+
+Button:disabled {
+  color: #94a3b8;
+  background: #f1f5f9;
+}
+
+Button.step {
+  width: 32;
+  padding: 0;
+}
+
+Button.primary {
+  width: 100%;
+  color: #ffffff;
+  background: #2563eb;
+}
+
+Button.primary:hover {
+  background: #1d4ed8;
+}
+
+Button.primary:disabled {
+  color: #e2e8f0;
+  background: #93c5fd;
+}
+
+/* Three of them share a 260 wide row with two 8 gaps: 3 * 80 + 16 = 256. */
+Button.action {
+  width: 80;
+  padding: 0 4;
+  font-size: 13;
+}
+
+Button.wide {
+  width: 150;
+}
+
+/* Two of them share a 260 wide row with an 8 gap. */
+Button.half {
+  width: 126;
+}
+
+.buttons-row {
+  gap: 8;
+  align-items: center;
+}
+
+.center {
+  gap: 16;
+}
+
+/* 4 rows of 26 = 104. */
+ScrollView.model-list {
+  width: 100%;
+  height: 104;
+  background: #f8fafc;
+  border-width: 1;
+  border-color: #e2e8f0;
+  border-radius: 4;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+ItemsControl.model-rows {
+  width: 100%;
+}
+
+Button.model-row {
+  width: 100%;
+  height: 26;
+  padding: 0 6;
+  font-size: 12;
+  background: #00000000;
+  text-align: start;
+  white-space: nowrap;
+}
+
+Button.model-row:hover {
+  background: #e2e8f0;
+}
+
+/* Rows of 26: the Datasets list is 8 of them. */
+ScrollView.dataset-list {
+  width: 100%;
+  height: 208;
+  background: #f8fafc;
+  border-width: 1;
+  border-color: #e2e8f0;
+  border-radius: 4;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* The grid shows 12 cells of 44 with 4 between them (576), and the scrollbar takes the rest of 584. A row is 48 tall:
+   it must stay a fixed height for the grid to build only the rows on screen. 7 rows are visible. */
+ScrollView.grid {
+  width: 100%;
+  height: 344;
+  background: #0f172a;
+  border-radius: 4;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+ItemsControl.grid-rows {
+  width: 100%;
+}
+
+.grid-row {
+  width: 100%;
+  height: 48;
+  gap: 4;
+}
+
+.cell {
+  width: 44;
+  height: 44;
+}
+
+/* ---- Neurons tab ---- */
+
+/* Two rows of 32 and an 8 gap: 72, as tall as the thumbnail of the drawing beside them. */
+.neuron-controls {
+  width: 100%;
+  height: 72;
+  gap: 12;
+}
+
+/* 584 less the thumbnail and a gap. */
+.neuron-ctl {
+  width: 500;
+  gap: 8;
+}
+
+.layer-text {
+  width: 300;
+  font-size: 14;
+  color: #334155;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* The two modes of the grid are one segmented control: the current one is blue. */
+Button.seg {
+  width: 100;
+}
+
+Button.seg-on {
+  width: 100;
+  color: #ffffff;
+  background: #2563eb;
+}
+
+Button.seg-on:hover {
+  background: #2563eb;
+}
+
+/* What is left of the 500 after two buttons and three gaps of 8: two lines of 12 fit in the row's 32. */
+.neuron-progress {
+  width: 276;
+  font-size: 12;
+  color: #64748b;
+}
+
+Component.thumb {
+  width: 72;
+  height: 72;
+}
+
+/* 7 rows of 48 and a half: the cut-off row shows that the grid scrolls. */
+ScrollView.neuron-grid {
+  width: 100%;
+  height: 360;
+  background: #0f172a;
+  border-radius: 4;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* 8 screen pixels per picture pixel; the group's 258 inside leaves 17 on each side. */
+Component.neuron-big {
+  width: 224;
+  height: 224;
+  margin: 0 17;
+}
+
+/* Ten bars and a row of digits under them (InfluencePaint). */
+Component.influence {
+  width: 100%;
+  height: 104;
+}
+
+.page-text {
+  width: 232;
+  font-size: 14;
+  color: #334155;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sample-info {
+  width: 420;
+  font-size: 14;
+  color: #334155;
+  white-space: nowrap;
+}
+
+TextInput.field {
+  width: 100%;
+  height: 32;
+  padding: 0 8;
+  font-size: 14;
+  color: #0f172a;
+  background: #ffffff;
+  border-width: 1;
+  border-color: #cbd5e1;
+  border-radius: 6;
+}
+
+TextInput.field:focus {
+  border-color: #2563eb;
+}
+
+/* The canvas goes here: 280 high, see the header comment. */
+.draw-spacer {
+  width: 280;
+  height: 280;
+}
+
+.draw-area {
+  position: absolute;
+  left: 16;
+  top: 100;
+  width: 280;
+  height: 280;
+}
+
+/* 10 rows of ProbabilityPaint::kRowHeight (34). */
+.probabilities {
+  width: 240;
+  height: 340;
+}
+
+/* 2 rows of PrototypePaint::kCellHeight (56). */
+.prototypes {
+  width: 240;
+  height: 112;
+}
+
+.check-row {
+  gap: 8;
+  height: 20;
+  align-items: center;
+}
+
+Checkbox.option-box {
+  width: 18;
+  height: 18;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  border-width: 1;
+  border-color: #94a3b8;
+  border-radius: 4;
+}
+
+Checkbox.option-box:hover {
+  border-color: #64748b;
+}
+
+Checkbox.option-box:checked {
+  background: #2563eb;
+  border-color: #1d4ed8;
+}
+
+
+
+.prediction {
+  font-size: 18;
+  white-space: nowrap;
+}
+
+.on {
+  color: #2563eb;
+}
+
+.off {
+  color: #94a3b8;
+}
+
+/* ---- Help tab ---- */
+
+/* Title 28, hint, gaps: the list takes what is left of the 540 under the tab bar and padding. */
+ScrollView.help-nav {
+  width: 100%;
+  height: 440;
+  background: #ffffff;
+  border-width: 1;
+  border-color: #e2e8f0;
+  border-radius: 6;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+ItemsControl.help-nav-list {
+  width: 100%;
+  padding: 4;
+}
+
+Stack.help-nav-row {
+  width: 100%;
+}
+
+Label.help-nav-header {
+  width: 100%;
+  margin: 8 0 2 4;
+  font-size: 11;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+Button.help-nav-item {
+  width: 100%;
+  height: 30;
+  padding: 0 8;
+  font-size: 13;
+  text-align: start;
+  white-space: nowrap;
+  background: #00000000;
+}
+
+Button.help-nav-item:hover {
+  background: #e2e8f0;
+}
+
+Button.help-nav-active {
+  width: 100%;
+  height: 30;
+  padding: 0 8;
+  font-size: 13;
+  text-align: start;
+  white-space: nowrap;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+ScrollView.help-content {
+  width: 604;
+  height: 536;
+  padding: 0 10 24 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+ItemsControl.h-topic {
+  width: 100%;
+}
+
+Stack.h-topic-body {
+  width: 100%;
+  gap: 10;
+}
+
+Label.h-kicker {
+  font-size: 12;
+  color: #2563eb;
+  white-space: nowrap;
+}
+
+Label.h-title {
+  width: 100%;
+  font-size: 26;
+  color: #0f172a;
+  margin: 0 0 4 0;
+}
+
+Label.h-head {
+  font-size: 12;
+  color: #64748b;
+  margin: 16 0 0 0;
+  white-space: nowrap;
+}
+
+Label.h-p {
+  width: 100%;
+  font-size: 15;
+  color: #1e293b;
+  line-height: 1.45;
+  user-select: text;
+}
+
+Stack.h-formula {
+  width: 100%;
+  padding: 14 12;
+  gap: 12;
+  align-items: center;
+  background: #f1f5f9;
+  border-radius: 8;
+  border-width: 1;
+  border-color: #e2e8f0;
+}
+
+Math.h-math {
+  font-size: 24;
+  color: #0f172a;
+}
+
+Stack.h-legend {
+  width: 100%;
+  gap: 8;
+}
+
+Stack.h-legend-row {
+  width: 100%;
+  gap: 14;
+  align-items: center;
+}
+
+Stack.h-sym {
+  width: 90;
+  align-items: center;
+}
+
+Math.h-sym-math {
+  font-size: 18;
+  color: #0f172a;
+}
+
+Label.h-legend-text {
+  width: calc(100% - 104px);
+  font-size: 14;
+  color: #334155;
+  line-height: 1.4;
+  user-select: text;
+}
+
+Stack.h-note {
+  width: 100%;
+  padding: 10 14;
+  gap: 8;
+  background: #eff6ff;
+  border-radius: 8;
+  border-width: 1;
+  border-color: #bfdbfe;
+}
+
+Label.h-note-text {
+  width: 100%;
+  font-size: 14;
+  color: #1e3a8a;
+  line-height: 1.45;
+  user-select: text;
+}
+
+Math.h-note-math {
+  font-size: 20;
+  color: #0f172a;
+}
+
+Stack.h-faq {
+  width: 100%;
+  gap: 12;
+}
+
+Stack.h-qa {
+  width: 100%;
+  gap: 4;
+  padding: 0 0 0 12;
+}
+
+Label.h-q {
+  width: 100%;
+  font-size: 15;
+  color: #1d4ed8;
+  line-height: 1.4;
+  user-select: text;
+}
+
+Label.h-a {
+  width: 100%;
+  font-size: 14;
+  color: #334155;
+  line-height: 1.45;
+  user-select: text;
+}
+
+Stack.h-figure {
+  width: 100%;
+  gap: 6;
+}
+
+Component.h-diagram {
+  width: 100%;
+}
+
+Component.dg-190 { height: 190; }
+Component.dg-200 { height: 200; }
+Component.dg-210 { height: 210; }
+Component.dg-220 { height: 220; }
+Component.dg-230 { height: 230; }
+Component.dg-240 { height: 240; }
+Component.dg-250 { height: 250; }
+Component.dg-260 { height: 260; }
+Component.dg-270 { height: 270; }
+Component.dg-280 { height: 280; }
+
+Stack.h-sliders {
+  width: 100%;
+  gap: 10;
+  padding: 6 0;
+}
+
+Stack.h-slider-row {
+  width: 100%;
+  gap: 14;
+  align-items: center;
+}
+
+Slider.h-slider {
+  position: relative;
+  width: calc(100% - 104px);
+  max-width: 360;
+  height: 14;
+  background: #e2e8f0;
+  border-radius: 7;
+}
+
+/* --fraction (0..1) is set by the engine on the slider and on both parts. */
+Stack.slider-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 14;
+  width: calc(var(--fraction) * 100%);
+  background: #93c5fd;
+  border-radius: 7;
+}
+
+Stack.slider-handle {
+  position: absolute;
+  top: -2;
+  width: 18;
+  height: 18;
+  left: calc(var(--fraction) * (100% - 18px));
+  background: #2563eb;
+  border-radius: 9;
+}
+
+Label.h-caption {
+  width: 100%;
+  font-size: 12;
+  color: #64748b;
+  line-height: 1.4;
+  user-select: text;
+}
+
+Button.h-try {
+  height: 36;
+  padding: 0 18;
+  margin: 12 0 0 0;
+  color: #ffffff;
+  background: #2563eb;
+}
+
+Button.h-try:hover {
+  background: #1d4ed8;
+}

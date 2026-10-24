@@ -1,0 +1,1345 @@
+locale = "en"
+
+[[string]]
+id = "btn.train"
+text = "Train New"
+
+[[string]]
+id = "btn.training"
+text = "Training..."
+
+[[string]]
+id = "digits.detail"
+text = "{digit} - {rate}% wrong ({wrong} of {total})"
+
+[[string]]
+id = "digits.easiest"
+text = "Fewest errors: {value}"
+
+[[string]]
+id = "digits.hardest"
+text = "Most errors: {value}"
+
+[[string]]
+id = "digits.per_digit"
+text = "Accuracy per digit: {value}"
+
+[[string]]
+id = "ds.add_pick"
+text = "Add to: pick your own dataset"
+
+[[string]]
+id = "ds.add_target"
+text = "Add to: {name}"
+
+[[string]]
+id = "ds.counts"
+text = "Samples per digit: {list}"
+
+[[string]]
+id = "ds.name"
+text = "Dataset: {name} ({count} samples)"
+
+[[string]]
+id = "ds.no_sample"
+text = "No sample selected"
+
+[[string]]
+id = "ds.page"
+text = "Samples {first}-{last} of {total}"
+
+[[string]]
+id = "ds.sample"
+text = "Sample {n}: digit {digit}"
+
+[[string]]
+id = "ds.title_custom"
+text = "{name} - {count} samples"
+
+[[string]]
+id = "ds.title_mnist"
+text = "MNIST (read-only) - {count} samples"
+
+[[string]]
+id = "err.no_user_data"
+text = "no user data directory"
+
+[[string]]
+id = "fig.box"
+text = "20 x 20"
+
+[[string]]
+id = "fig.centre"
+text = "centre of mass"
+
+[[string]]
+id = "fig.epochs"
+text = "epochs"
+
+[[string]]
+id = "fig.hidden"
+text = "hidden"
+
+[[string]]
+id = "fig.input"
+text = "input"
+
+[[string]]
+id = "fig.loss"
+text = "loss L"
+
+[[string]]
+id = "fig.original"
+text = "original"
+
+[[string]]
+id = "fig.pixel_values"
+text = "brightness values"
+
+[[string]]
+id = "fig.prob_correct"
+text = "probability of the correct digit"
+
+[[string]]
+id = "fig.probabilities"
+text = "probabilities"
+
+[[string]]
+id = "fig.scaled"
+text = "scaled"
+
+[[string]]
+id = "fig.scores"
+text = "scores"
+
+[[string]]
+id = "fig.shifted"
+text = "shifted"
+
+[[string]]
+id = "fig.test"
+text = "new data"
+
+[[string]]
+id = "fig.train"
+text = "training data"
+
+[[string]]
+id = "fig.vector"
+text = "list x"
+
+[[string]]
+id = "fig.weight"
+text = "weight w"
+
+[[string]]
+id = "help.augment.a8"
+text = "If you draw off centre or at different sizes, yes. If you only care about the MNIST test number, training without them gives slightly higher accuracy there."
+
+[[string]]
+id = "help.augment.fig2"
+text = "The same digit as it is, shifted and scaled. In every case the whole digit stays inside the picture."
+
+[[string]]
+id = "help.augment.kicker"
+text = "TOPIC 14"
+
+[[string]]
+id = "help.augment.legend4"
+text = "the scale factor: 1 means unchanged."
+
+[[string]]
+id = "help.augment.note6"
+text = "Augmentation usually lowers accuracy on neat MNIST digits a little and raises it a lot on shifted or differently sized ones, like the ones you draw."
+
+[[string]]
+id = "help.augment.p1"
+text = "MNIST digits are neat: centred and about the same size. Real handwriting is not. Augmentation shows the model the same digit changed in small random ways, so that it learns these changes do not change the answer."
+
+[[string]]
+id = "help.augment.p3"
+text = "Random shift moves the digit by a random whole number of pixels, always keeping it fully inside the picture. Random scale enlarges or shrinks it about its centre by a factor between 0.7 and 1.4, again never cutting it off. New random changes are drawn every epoch."
+
+[[string]]
+id = "help.augment.p5"
+text = "The mutated line next to the test accuracy is a stricter exam: the same MNIST test pictures, but each one scaled and shifted at random (the same way every evaluation). A model that is good only on neat digits scores much lower there."
+
+[[string]]
+id = "help.augment.q7"
+text = "Should I always turn both on?"
+
+[[string]]
+id = "help.augment.title"
+text = "Shifts and scales"
+
+[[string]]
+id = "help.augment.try"
+text = "Open the Train tab"
+
+[[string]]
+id = "help.backprop.a8"
+text = "No. It is here for the curious: this is exactly what the code does for every picture of every batch."
+
+[[string]]
+id = "help.backprop.kicker"
+text = "TOPIC 11"
+
+[[string]]
+id = "help.backprop.legend3"
+text = "the error signal of a neuron: how much the loss changes if its value changes."
+
+[[string]]
+id = "help.backprop.legend4"
+text = "1 if neuron j was active, 0 if ReLU cut it."
+
+[[string]]
+id = "help.backprop.legend5"
+text = "1 for the correct digit, 0 for the others."
+
+[[string]]
+id = "help.backprop.note6"
+text = "For every picture this costs about as much as the forward pass, which is why training is fast enough to run live inside the program."
+
+[[string]]
+id = "help.backprop.p1"
+text = "Gradient descent needs the derivative of the loss for every weight in every layer. Backpropagation computes all of them in one backward pass using the chain rule: start from the output and push the error back layer by layer."
+
+[[string]]
+id = "help.backprop.p2"
+text = "In words: the output error p minus t tells how wrong each score was. A hidden neuron is responsible in proportion to its weight towards that score, and only if it was active (h above 0): ReLU lets the error pass through active neurons and blocks it through silent ones."
+
+[[string]]
+id = "help.backprop.q7"
+text = "Do I need this to use the program?"
+
+[[string]]
+id = "help.backprop.title"
+text = "Backpropagation"
+
+[[string]]
+id = "help.batches.a8"
+text = "The cost grows with the data while the benefit of the exact gradient is small: a noisy estimate from 32 pictures already points roughly the right way, and thousands of cheap steps beat a few exact ones."
+
+[[string]]
+id = "help.batches.kicker"
+text = "TOPIC 9"
+
+[[string]]
+id = "help.batches.legend3"
+text = "pictures in one mini-batch."
+
+[[string]]
+id = "help.batches.legend4"
+text = "the loss of picture n of the batch."
+
+[[string]]
+id = "help.batches.legend5"
+text = "one full pass through the training data."
+
+[[string]]
+id = "help.batches.note6"
+text = "Loss (last epoch) on the Train tab is the average loss measured while training on that epoch, a cheap estimate: the weights keep changing during the epoch. With fewer than 32 samples the whole dataset is one batch."
+
+[[string]]
+id = "help.batches.p1"
+text = "Computing the gradient over all 60 000 pictures for every step would be slow. Instead the program takes a small random group, a mini-batch of 32 pictures, averages their gradients and makes one step. This is stochastic gradient descent."
+
+[[string]]
+id = "help.batches.p2"
+text = "One pass through all training pictures is an epoch. At the start of every epoch the pictures are shuffled, so every picture is used exactly once per epoch, in a new order. The Epochs setting says how many passes to make: on MNIST one epoch is 60 000 / 32 = 1 875 steps."
+
+[[string]]
+id = "help.batches.q7"
+text = "Why not take the whole dataset at every step?"
+
+[[string]]
+id = "help.batches.title"
+text = "Batches, epochs and shuffling"
+
+[[string]]
+id = "help.batches.try"
+text = "Open the Train tab"
+
+[[string]]
+id = "help.datasets.a10"
+text = "A few dozen change little; a few hundred per digit start to matter. The quality of labels matters more than the quantity: one wrong label hurts a small dataset."
+
+[[string]]
+id = "help.datasets.fig2"
+text = "A drawn digit is cut out, scaled so its longer side is 20 pixels, and placed so that its centre of mass (the cross) is in the middle of the 28 by 28 picture."
+
+[[string]]
+id = "help.datasets.kicker"
+text = "TOPIC 15"
+
+[[string]]
+id = "help.datasets.legend4"
+text = "the brightness of pixel i."
+
+[[string]]
+id = "help.datasets.legend5"
+text = "the column and row of pixel i."
+
+[[string]]
+id = "help.datasets.legend6"
+text = "the centre of mass: the average position weighted by brightness."
+
+[[string]]
+id = "help.datasets.p1"
+text = "MNIST is read-only, but you can create your own datasets and fill them with digits you draw: pick the digit label, draw, press Add. Every dataset is stored in a file in your user data folder."
+
+[[string]]
+id = "help.datasets.p3"
+text = "A drawn digit is first normalized the way MNIST digits are: cut out along its bounding box, scaled so the longer side is 20 pixels (keeping proportions) and placed so that its centre of mass is at the centre of the picture. Shifts and scales can still be added during training with the checkboxes."
+
+[[string]]
+id = "help.datasets.p7"
+text = "Training uses one dataset at a time: pick it with Prev and Next on the Train tab. A good recipe is to train on MNIST first, then select your dataset and press Continue Training to adapt the model to your handwriting. Training on a small dataset alone is possible but gives a weak model."
+
+[[string]]
+id = "help.datasets.p8"
+text = "On the Datasets tab the grid lists the samples sorted by digit, with the count per digit above it. Click a sample to select it and delete it if its label or drawing is wrong. MNIST is shown in pages of 6 000."
+
+[[string]]
+id = "help.datasets.q9"
+text = "How many digits do I need?"
+
+[[string]]
+id = "help.datasets.title"
+text = "Your own datasets"
+
+[[string]]
+id = "help.datasets.try"
+text = "Open the Datasets tab"
+
+[[string]]
+id = "help.dot.a9"
+text = "Not in this program. Every pixel is treated on its own, and only the weighted sum mixes them. That is why a digit drawn far from the centre confuses a simple model: the same shape lights up different pixels."
+
+[[string]]
+id = "help.dot.kicker"
+text = "TOPIC 4"
+
+[[string]]
+id = "help.dot.legend3"
+text = "add up over all the pixels."
+
+[[string]]
+id = "help.dot.legend4"
+text = "the weight of pixel i."
+
+[[string]]
+id = "help.dot.legend5"
+text = "the brightness of pixel i."
+
+[[string]]
+id = "help.dot.legend6"
+text = "the bias."
+
+[[string]]
+id = "help.dot.note7"
+text = "The sum of products of two lists has a name: the dot product. In short form the same formula reads"
+
+[[string]]
+id = "help.dot.p1"
+text = "With 784 inputs the line becomes a weighted sum. Every input x_i gets its own weight w_i, all the products are added up, and the bias is added."
+
+[[string]]
+id = "help.dot.p2"
+text = "Look at what it means: a pixel with a large positive weight pushes y up when it is bright; a pixel with a negative weight pushes y down. The weights form a picture of their own, a template. The sum is large when your drawing lights up the places where the template is positive."
+
+[[string]]
+id = "help.dot.q8"
+text = "Does the model look at neighbouring pixels?"
+
+[[string]]
+id = "help.dot.title"
+text = "Many inputs: a weighted sum"
+
+[[string]]
+id = "help.gradient.a10"
+text = "In a valley that is not the deepest one, yes (a local minimum). The linear model has a single valley, so it cannot. In deeper networks it can happen, but the valleys found in practice are good enough."
+
+[[string]]
+id = "help.gradient.fig2"
+text = "One weight w and the loss L(w). Each step moves against the slope, and the steps shrink as the slope flattens near the minimum."
+
+[[string]]
+id = "help.gradient.kicker"
+text = "TOPIC 8"
+
+[[string]]
+id = "help.gradient.legend4"
+text = "the learning rate: how big a step to take."
+
+[[string]]
+id = "help.gradient.legend5"
+text = "how much the loss changes per unit change of w."
+
+[[string]]
+id = "help.gradient.legend6"
+text = "is replaced by."
+
+[[string]]
+id = "help.gradient.note8"
+text = "Read it as a rule: if the model gives digit k too much probability (p_k above t_k), the weights of pixels that are bright in this picture go down; if too little, they go up. Each picture teaches the weights a little."
+
+[[string]]
+id = "help.gradient.p1"
+text = "We know the loss and want it smaller. Imagine the loss as a hilly landscape over all the weights. At the current weights the gradient points uphill; a step in the opposite direction goes downhill."
+
+[[string]]
+id = "help.gradient.p3"
+text = "The derivative answers: if w grows a little, how does the loss change? The step goes against it. The learning rate η (eta) sets the size of the step. In this program η = 0.1. Too large and the steps overshoot; too small and training crawls."
+
+[[string]]
+id = "help.gradient.p7"
+text = "For the linear classifier with softmax the derivatives are surprisingly simple. Here t_k is 1 for the correct digit and 0 for the others:"
+
+[[string]]
+id = "help.gradient.q9"
+text = "Can it get stuck?"
+
+[[string]]
+id = "help.gradient.title"
+text = "Gradient descent"
+
+[[string]]
+id = "help.h.faq"
+text = "COMMON QUESTIONS"
+
+[[string]]
+id = "help.h.formulas"
+text = "FORMULAS"
+
+[[string]]
+id = "help.h.idea"
+text = "IDEA"
+
+[[string]]
+id = "help.h.legend"
+text = "WHAT'S WHAT"
+
+[[string]]
+id = "help.h.where"
+text = "IN THE PROGRAM"
+
+[[string]]
+id = "help.hidden.a11"
+text = "They add capacity, but training is slower and the risk of memorizing the training pictures grows. For MNIST a single layer of 64 to 128 neurons already reaches about 97%."
+
+[[string]]
+id = "help.hidden.fig2"
+text = "A network with one hidden layer: 784 inputs, a hidden layer, 10 scores. Every line is a weight. Layers and Neurons set how many hidden layers there are and how wide."
+
+[[string]]
+id = "help.hidden.fig4"
+text = "ReLU: zero for negative inputs, the input itself for positive ones."
+
+[[string]]
+id = "help.hidden.kicker"
+text = "TOPIC 10"
+
+[[string]]
+id = "help.hidden.legend6"
+text = "the value of hidden neuron j."
+
+[[string]]
+id = "help.hidden.legend7"
+text = "weights and bias of the first layer: from pixels to hidden neurons."
+
+[[string]]
+id = "help.hidden.legend8"
+text = "weights and bias of the second layer: from hidden neurons to scores."
+
+[[string]]
+id = "help.hidden.legend9"
+text = "ReLU: the larger of 0 and z."
+
+[[string]]
+id = "help.hidden.p1"
+text = "A single weighted sum per digit is limited. Hidden layers add middle steps: first compute many intermediate values h, the hidden neurons, then compute the ten scores from them."
+
+[[string]]
+id = "help.hidden.p3"
+text = "Each hidden neuron is a small linear model of its own that looks for one pattern: a stroke, a curve. The function max(0, z), called ReLU, cuts negative values to 0. This bend is essential: without it two layers collapse into a single weighted sum, however many neurons you add."
+
+[[string]]
+id = "help.hidden.p5"
+text = "The formula above shows what happens without ReLU: the result is again just one weighted sum, with new weights. The count of adjustable numbers for one hidden layer of 64 neurons: 784 · 64 + 64 + 64 · 10 + 10 = 50 890."
+
+[[string]]
+id = "help.hidden.q10"
+text = "Are more layers always better?"
+
+[[string]]
+id = "help.hidden.title"
+text = "Hidden layers and ReLU"
+
+[[string]]
+id = "help.hidden.try"
+text = "Try it on the Train tab"
+
+[[string]]
+id = "help.ideal.a9"
+text = "The model only learned to tell digits apart on realistic pictures. For unusual inputs its confidence can be high for reasons that make no sense to a human."
+
+[[string]]
+id = "help.ideal.kicker"
+text = "TOPIC 17"
+
+[[string]]
+id = "help.ideal.legend3"
+text = "the loss for digit k: it falls as the model becomes surer of k."
+
+[[string]]
+id = "help.ideal.legend4"
+text = "how the loss changes when pixels change."
+
+[[string]]
+id = "help.ideal.legend5"
+text = "the size of an input step (not the training rate)."
+
+[[string]]
+id = "help.ideal.note7"
+text = "Ideal means what excites the model most, not what a typical digit looks like. It shows what the model pays attention to."
+
+[[string]]
+id = "help.ideal.p1"
+text = "The Ideal Digits panel shows, for every digit, the picture the model is most sure about. It is not taken from the data: the program starts from faint noise and repeatedly changes the pixels in the direction that makes the model more confident in that digit. This is gradient descent on the loss, but on the input instead of the weights."
+
+[[string]]
+id = "help.ideal.p2"
+text = "This uses the same derivative machinery as training, but now the weights stay fixed and the input changes. A little blurring and fading is applied at every step so that the result looks like strokes instead of noise."
+
+[[string]]
+id = "help.ideal.p6"
+text = "For a linear model these pictures are close to its weight templates and often look like ghosts of the digits. For networks trained with shifts and scaling they can look like abstract blobs: such a model does not care where the digit is, so there is no single ideal place."
+
+[[string]]
+id = "help.ideal.q8"
+text = "Why do some of them look strange?"
+
+[[string]]
+id = "help.ideal.title"
+text = "Ideal digits"
+
+[[string]]
+id = "help.ideal.try"
+text = "See them on the Recognize tab"
+
+[[string]]
+id = "help.image.fig2"
+text = "A picture as a grid of brightness values; reading the rows one after another gives one long list x."
+
+[[string]]
+id = "help.image.kicker"
+text = "TOPIC 3"
+
+[[string]]
+id = "help.image.legend4"
+text = "the brightness of pixel number i: 0 is black, 1 is white."
+
+[[string]]
+id = "help.image.legend5"
+text = "the number of pixels, and so the number of inputs of the model."
+
+[[string]]
+id = "help.image.note6"
+text = "The canvas where you draw is exactly 28 by 28 pixels, only enlarged. The brush paints a soft dot, so strokes are about two pixels thick, like in MNIST."
+
+[[string]]
+id = "help.image.p1"
+text = "A model works with numbers, so a picture has to become numbers. The digits here are 28 by 28 grayscale pixels. Every pixel has a brightness from 0 (black) to 255 (white); divided by 255 it becomes a number between 0 and 1."
+
+[[string]]
+id = "help.image.p3"
+text = "Line the pixels up row by row and you get one long list of 784 numbers: the input x. This is all the model ever sees of your drawing. It does not know what a digit is, only these numbers."
+
+[[string]]
+id = "help.image.title"
+text = "A picture is a list of numbers"
+
+[[string]]
+id = "help.image.try"
+text = "See real digits in the Datasets tab"
+
+[[string]]
+id = "help.init.a6"
+text = "The random starting values differ and the pictures are shuffled differently each time, so two runs end in different weights, usually with similar accuracy."
+
+[[string]]
+id = "help.init.kicker"
+text = "TOPIC 12"
+
+[[string]]
+id = "help.init.legend3"
+text = "the normal (bell-shaped) distribution with mean 0 and spread σ."
+
+[[string]]
+id = "help.init.legend4"
+text = "the number of inputs of the layer: 784 for the first."
+
+[[string]]
+id = "help.init.p1"
+text = "Before training, the weights need starting values. All zeros would not work in a network with hidden layers: every neuron would behave identically and receive identical updates forever. So the weights start as small random numbers."
+
+[[string]]
+id = "help.init.p2"
+text = "The program uses He initialization: the spread σ depends on the number of inputs of the layer. It keeps the signals from fading or blowing up as they pass through layers with ReLU. The biases start at 0."
+
+[[string]]
+id = "help.init.q5"
+text = "Why does every new model come out a little different?"
+
+[[string]]
+id = "help.init.title"
+text = "Starting values"
+
+[[string]]
+id = "help.intro.a6"
+text = "No. Basic school math is enough: multiplication, addition, a graph of a line. New ideas come one at a time."
+
+[[string]]
+id = "help.intro.kicker"
+text = "TOPIC 1"
+
+[[string]]
+id = "help.intro.note4"
+text = "How to read the topics: each starts with the idea, then the formulas, then what every symbol means. If a formula looks scary, read the idea first: every formula here is just a short way to write something simple."
+
+[[string]]
+id = "help.intro.p1"
+text = "The program learns to recognize handwritten digits. You draw a digit on the canvas, and a model, a function with thousands of adjustable numbers, says which of the ten digits 0 to 9 it thinks it is. Nothing is programmed by hand: the numbers are found by showing the model many examples together with the correct answers. This is called training."
+
+[[string]]
+id = "help.intro.p2"
+text = "The data comes from MNIST, a well-known collection of 70 000 pictures of handwritten digits, 28 by 28 pixels each. 60 000 of them are used for training and 10 000 only for testing. You can also build your own datasets from digits you draw."
+
+[[string]]
+id = "help.intro.p3"
+text = "Recognize: draw and see the answer of the model. Train: create a model or train one further. Datasets: look at the data and add your own digits. Help: this reference. The topics go from the simplest idea, a straight line, to everything the program shows."
+
+[[string]]
+id = "help.intro.q5"
+text = "Do I need to know math?"
+
+[[string]]
+id = "help.intro.title"
+text = "What this program does"
+
+[[string]]
+id = "help.intro.try"
+text = "Open the Recognize tab"
+
+[[string]]
+id = "help.linear.a11"
+text = "Without b every line passes through the origin: x = 0 would always give y = 0. The bias lets the model say something even when all inputs are zero."
+
+[[string]]
+id = "help.linear.fig2"
+text = "Drag the sliders. The weight w is the slope: moving 1 to the right raises the line by w. The bias b is where the line crosses the vertical axis."
+
+[[string]]
+id = "help.linear.kicker"
+text = "TOPIC 2"
+
+[[string]]
+id = "help.linear.legend4"
+text = "the input, a number."
+
+[[string]]
+id = "help.linear.legend5"
+text = "the output of the model, its prediction."
+
+[[string]]
+id = "help.linear.legend6"
+text = "the weight: how much y changes when x grows by 1."
+
+[[string]]
+id = "help.linear.legend7"
+text = "the bias: the value of y at x = 0."
+
+[[string]]
+id = "help.linear.note8"
+text = "Example with w = 0.5 and b = 1: the input x = 4 gives"
+
+[[string]]
+id = "help.linear.p1"
+text = "Start with the simplest model there is. It takes one number x and returns one number y. Inside it there are just two adjustable numbers: the weight w and the bias b."
+
+[[string]]
+id = "help.linear.p3"
+text = "The weight w says how strongly y reacts to x: if x grows by 1, y grows by w. The bias b is the value of y when x = 0; it moves the whole line up or down. Changing w tilts the line, changing b shifts it."
+
+[[string]]
+id = "help.linear.p9"
+text = "Learning means finding w and b so that y matches the correct answers as well as possible. Everything else in this program is the same idea with many more numbers."
+
+[[string]]
+id = "help.linear.q10"
+text = "Why is b needed if there is already w?"
+
+[[string]]
+id = "help.linear.title"
+text = "A straight line: y = wx + b"
+
+[[string]]
+id = "help.loss.a10"
+text = "Counting mistakes jumps from 0 to 1 and tells the model nothing about which direction is better. The loss changes smoothly with every weight, so we can follow it downhill."
+
+[[string]]
+id = "help.loss.fig2"
+text = "The loss for one picture as a function of the probability given to the correct digit: near 0 when the model is sure and right, huge when it is sure and wrong."
+
+[[string]]
+id = "help.loss.kicker"
+text = "TOPIC 7"
+
+[[string]]
+id = "help.loss.legend4"
+text = "the loss for one picture."
+
+[[string]]
+id = "help.loss.legend5"
+text = "the natural logarithm."
+
+[[string]]
+id = "help.loss.legend6"
+text = "the probability the model gave to the correct digit y."
+
+[[string]]
+id = "help.loss.legend7"
+text = "the number of pictures averaged over."
+
+[[string]]
+id = "help.loss.note8"
+text = "This loss is called cross-entropy. Training means making its average over all the data as small as possible."
+
+[[string]]
+id = "help.loss.p1"
+text = "To improve a model we must measure how wrong it is with one number: the loss. For one picture whose correct digit is y, we look at the probability the model gave to that digit."
+
+[[string]]
+id = "help.loss.p3"
+text = "If the model gave the right digit probability 1, the loss is 0. For 0.5 the loss is 0.69; for 0.1 it is 2.30; as the probability goes to 0 the loss grows without bound. So confident mistakes are punished hardest. The loss in the status line is the average of this value over the training pictures."
+
+[[string]]
+id = "help.loss.q9"
+text = "Why not just count mistakes?"
+
+[[string]]
+id = "help.loss.title"
+text = "How wrong is the model: the loss"
+
+[[string]]
+id = "help.metrics.a6"
+text = "The program scores the model on 10 000 test pictures twice (normal and mutated), in small slices so the window stays responsive."
+
+[[string]]
+id = "help.metrics.kicker"
+text = "TOPIC 16"
+
+[[string]]
+id = "help.metrics.note4"
+text = "The status line at the bottom shows what the program is doing: loading, training progress with the loss, saving and scoring."
+
+[[string]]
+id = "help.metrics.p1"
+text = "Accuracy on MNIST test is the share of the 10 000 test pictures the model labels correctly; mutated is the same on scaled and shifted pictures. The Per Digit panel breaks it down: which digit the model gets wrong most often, which least, and the accuracy for each digit."
+
+[[string]]
+id = "help.metrics.p2"
+text = "A typical pattern: 0 and 1 are the easiest because their shapes are distinctive; 8, 5, 9 and 3 get mixed up more often. A linear model reaches about 91%, a small hidden-layer model about 97%, a well-trained larger one about 98%."
+
+[[string]]
+id = "help.metrics.p3"
+text = "A model file stores the weights and the number of epochs the model has been trained for, so you can see how much training it had; Continue Training adds to that number."
+
+[[string]]
+id = "help.metrics.q5"
+text = "Why does a model need a few seconds after loading?"
+
+[[string]]
+id = "help.metrics.title"
+text = "Reading the numbers"
+
+[[string]]
+id = "help.mnist.a6"
+text = "It needs a pass over all the training pictures, which takes a while. It is computed once, when training finishes, and shown in the Last Training block."
+
+[[string]]
+id = "help.mnist.fig2"
+text = "Typical curves: the loss on training pictures keeps falling, while on new pictures it stops falling and may start to rise: overfitting."
+
+[[string]]
+id = "help.mnist.kicker"
+text = "TOPIC 13"
+
+[[string]]
+id = "help.mnist.note4"
+text = "The test line always says MNIST test, whatever the model was trained on, so models trained on different datasets can be compared on the same fixed exam."
+
+[[string]]
+id = "help.mnist.p1"
+text = "A model that has memorized its training pictures is useless on new ones. To check real quality we measure accuracy on pictures the model never trained on. MNIST has 10 000 of them, called the test set."
+
+[[string]]
+id = "help.mnist.p3"
+text = "Train accuracy that keeps rising while test accuracy stalls or falls means overfitting: the model starts remembering particular pictures instead of learning what makes a digit. More data, fewer parameters or augmentation fight it."
+
+[[string]]
+id = "help.mnist.q5"
+text = "Why is Train accuracy shown only after training?"
+
+[[string]]
+id = "help.mnist.title"
+text = "Train and test"
+
+[[string]]
+id = "help.nav_sub"
+text = "Ideas and formulas behind the program"
+
+[[string]]
+id = "help.nav_title"
+text = "Reference"
+
+[[string]]
+id = "help.scores.a10"
+text = "One weighted sum per digit can only compare brightness in fixed places. Digits written thinner, shifted or slanted need something more flexible. That is the reason for hidden layers."
+
+[[string]]
+id = "help.scores.fig2"
+text = "Ten scores for one picture. Scores can be any numbers, even negative. The model answers with the digit that has the highest one."
+
+[[string]]
+id = "help.scores.kicker"
+text = "TOPIC 5"
+
+[[string]]
+id = "help.scores.legend4"
+text = "the score of digit k: how well the picture fits the template of k."
+
+[[string]]
+id = "help.scores.legend5"
+text = "the weight of pixel i in the template of digit k."
+
+[[string]]
+id = "help.scores.legend6"
+text = "the bias of digit k."
+
+[[string]]
+id = "help.scores.legend7"
+text = "the answer of the model: the digit with the largest score."
+
+[[string]]
+id = "help.scores.note8"
+text = "The ten rows of weights can be shown as ten pictures, one per digit. They look like blurry ghosts of the digits. This is what the Ideal Digits panel on the Recognize tab shows for a linear model."
+
+[[string]]
+id = "help.scores.p1"
+text = "We need ten answers, one per digit, so we simply keep ten such sums, each with its own weights and its own bias. The k-th sum is the score of digit k."
+
+[[string]]
+id = "help.scores.p3"
+text = "The answer of the model is the digit with the highest score. In the program: set Layers to 0 and you get exactly this model, the linear classifier. It has 784 · 10 + 10 = 7 850 adjustable numbers."
+
+[[string]]
+id = "help.scores.q9"
+text = "Why can this model never be perfect?"
+
+[[string]]
+id = "help.scores.title"
+text = "Ten scores, one answer"
+
+[[string]]
+id = "help.section.basics"
+text = "I. BASICS"
+
+[[string]]
+id = "help.section.classifier"
+text = "II. THE CLASSIFIER"
+
+[[string]]
+id = "help.section.data"
+text = "V. DATA"
+
+[[string]]
+id = "help.section.network"
+text = "IV. THE NETWORK"
+
+[[string]]
+id = "help.section.results"
+text = "VI. RESULTS"
+
+[[string]]
+id = "help.section.training"
+text = "III. TRAINING"
+
+[[string]]
+id = "help.softmax.a9"
+text = "Not exactly. A model can be confidently wrong, especially on pictures unlike its training data, such as an empty canvas or a scribble. The number says how the model shares its confidence among the ten digits, not how often it is right."
+
+[[string]]
+id = "help.softmax.fig2"
+text = "The same picture: scores on the left, probabilities after softmax on the right. The ranking stays, but the gaps grow."
+
+[[string]]
+id = "help.softmax.kicker"
+text = "TOPIC 6"
+
+[[string]]
+id = "help.softmax.legend4"
+text = "the probability the model gives to digit k."
+
+[[string]]
+id = "help.softmax.legend5"
+text = "the score of digit k."
+
+[[string]]
+id = "help.softmax.legend6"
+text = "Euler's number, about 2.718."
+
+[[string]]
+id = "help.softmax.note7"
+text = "Example for three scores 2, 1 and 0: the exponentials are 7.39, 2.72 and 1, their sum is 11.11, so"
+
+[[string]]
+id = "help.softmax.p1"
+text = "Scores are hard to interpret: they can be any numbers, negative or huge. Softmax turns the ten scores into ten probabilities that are positive and add up to 1."
+
+[[string]]
+id = "help.softmax.p3"
+text = "The exponential e^s makes every number positive and magnifies differences: a slightly higher score becomes a much larger share. Dividing by the sum makes the shares add up to 1. The bars under Class Probabilities are these p_k."
+
+[[string]]
+id = "help.softmax.q8"
+text = "Is 70% really a 70% chance?"
+
+[[string]]
+id = "help.softmax.title"
+text = "Softmax: from scores to probabilities"
+
+[[string]]
+id = "last.dataset"
+text = "Trained on {name} ({samples} samples)"
+
+[[string]]
+id = "last.loss"
+text = "Loss (last epoch): {loss}"
+
+[[string]]
+id = "last.none"
+text = "No training yet"
+
+[[string]]
+id = "last.not_saved"
+text = "Not saved: {detail}"
+
+[[string]]
+id = "last.saved"
+text = "Saved as: {file}"
+
+[[string]]
+id = "last.train"
+text = "Train: {acc} | mutated: {mutated}"
+
+[[string]]
+id = "model.arch"
+text = "Architecture: {value}"
+
+[[string]]
+id = "model.epochs"
+text = "Epochs trained: {value}"
+
+[[string]]
+id = "model.epochs_unknown"
+text = "unknown"
+
+[[string]]
+id = "model.layers"
+text = "Layers: {value}"
+
+[[string]]
+id = "model.layers_equal"
+text = "Layers: {count} x {neurons} neurons"
+
+[[string]]
+id = "model.layers_linear"
+text = "Layers: none (linear)"
+
+[[string]]
+id = "model.layers_mixed"
+text = "Layers (neurons): {sizes}"
+
+[[string]]
+id = "model.name"
+text = "Model: {name}"
+
+[[string]]
+id = "model.none"
+text = "Model: none"
+
+[[string]]
+id = "name.bad_chars"
+text = "Use only letters, digits, - and _ in a dataset name"
+
+[[string]]
+id = "name.empty"
+text = "Type a name for the dataset first"
+
+[[string]]
+id = "name.reserved"
+text = "MNIST is a reserved name"
+
+[[string]]
+id = "name.too_long"
+text = "The name is longer than {max} characters"
+
+[[string]]
+id = "neurons.bias"
+text = "Bias: {value}"
+
+[[string]]
+id = "neurons.empty"
+text = "Load or train a model to see what its neurons look for."
+
+[[string]]
+id = "neurons.influence"
+text = "Effect on each digit's score"
+
+[[string]]
+id = "neurons.influence_drawing"
+text = "Effect on each digit's score, for your drawing"
+
+[[string]]
+id = "neurons.influence_open"
+text = "Effect on each digit's score, if every later neuron fires"
+
+[[string]]
+id = "neurons.layer"
+text = "Layer {layer} of {count} - {size} neurons"
+
+[[string]]
+id = "neurons.layer_output"
+text = "Output layer - {size} neurons, one per digit"
+
+[[string]]
+id = "neurons.legend_dream"
+text = "The image this neuron likes best. Bright pixels: it wants ink there."
+
+[[string]]
+id = "neurons.legend_weights"
+text = "Red: this pixel excites the neuron. Blue: it inhibits it. Black: it is ignored."
+
+[[string]]
+id = "neurons.no_drawing"
+text = "Draw a digit on the Recognize tab to see how this neuron reacts."
+
+[[string]]
+id = "neurons.note_deep"
+text = "Deeper layers read neurons, not pixels: only Dream is available."
+
+[[string]]
+id = "neurons.now"
+text = "On your drawing: {value} ({percent}% of the strongest in this layer)"
+
+[[string]]
+id = "neurons.now_prob"
+text = "On your drawing: {percent}% sure it is this digit"
+
+[[string]]
+id = "neurons.progress"
+text = "Dreaming {done} of {total}..."
+
+[[string]]
+id = "neurons.silent"
+text = "On your drawing: silent, it does not fire."
+
+[[string]]
+id = "neurons.title"
+text = "Layer {layer}, neuron {neuron}"
+
+[[string]]
+id = "neurons.title_digit"
+text = "Digit {digit}"
+
+[[string]]
+id = "status.dataset_created"
+text = "Created dataset {name}"
+
+[[string]]
+id = "status.dataset_delete_failed"
+text = "Failed to delete dataset {name}"
+
+[[string]]
+id = "status.dataset_deleted"
+text = "Deleted dataset {name}"
+
+[[string]]
+id = "status.dataset_exists"
+text = "A dataset named {name} already exists"
+
+[[string]]
+id = "status.loading_mnist"
+text = "Loading MNIST..."
+
+[[string]]
+id = "status.mnist_failed"
+text = "MNIST failed to load: {detail}"
+
+[[string]]
+id = "status.mnist_readonly"
+text = "MNIST cannot be changed: pick or create your own dataset first"
+
+[[string]]
+id = "status.mnist_ready"
+text = "MNIST ready: {train} train / {test} test samples"
+
+[[string]]
+id = "status.model_delete_failed"
+text = "Failed to delete {name}"
+
+[[string]]
+id = "status.model_deleted"
+text = "Deleted {name}"
+
+[[string]]
+id = "status.model_load_failed"
+text = "Failed to load model: {detail}"
+
+[[string]]
+id = "status.model_loaded"
+text = "Loaded {name} ({arch})"
+
+[[string]]
+id = "status.model_loading"
+text = "Loading {name}..."
+
+[[string]]
+id = "status.models_refreshed"
+text = "Model list refreshed"
+
+[[string]]
+id = "status.sample_added"
+text = "Added a {digit} to {name} ({count} samples)"
+
+[[string]]
+id = "status.sample_deleted"
+text = "Deleted sample {n} from {name}"
+
+[[string]]
+id = "status.save_error"
+text = "Failed to save: {detail}"
+
+[[string]]
+id = "status.save_failed"
+text = "Training done, save failed: {detail}"
+
+[[string]]
+id = "status.saved"
+text = "Saved {file} | loss: {loss} | MNIST test: {test}"
+
+[[string]]
+id = "status.saving"
+text = "Saving and scoring the model..."
+
+[[string]]
+id = "status.starting"
+text = "Starting..."
+
+[[string]]
+id = "status.training"
+text = "Training on {dataset}: epoch {epoch}/{epochs} ({percent}%)"
+
+[[string]]
+id = "status.training_loss"
+text = "Training on {dataset}: epoch {epoch}/{epochs} ({percent}%) | loss: {loss}"
+
+[[string]]
+id = "test.line"
+text = "MNIST test: {value}"
+
+[[string]]
+id = "test.mutated"
+text = "MNIST test, mutated: {value}"
+
+[[string]]
+id = "test.scoring"
+text = "scoring {percent}%"
+
+[[string]]
+id = "text.prediction"
+text = "Prediction: {digit}"
+
+[[string]]
+id = "text.prediction_none"
+text = "Prediction: -"
+
+[[string]]
+id = "ui.add.digit"
+text = "Digit:"
+
+[[string]]
+id = "ui.add.title"
+text = "Add to Dataset"
+
+[[string]]
+id = "ui.btn.add"
+text = "Add"
+
+[[string]]
+id = "ui.btn.clear"
+text = "Clear"
+
+[[string]]
+id = "ui.btn.continue"
+text = "Continue Training"
+
+[[string]]
+id = "ui.btn.create"
+text = "Create"
+
+[[string]]
+id = "ui.btn.delete"
+text = "Delete"
+
+[[string]]
+id = "ui.btn.delete_dataset"
+text = "Delete Dataset"
+
+[[string]]
+id = "ui.btn.delete_sample"
+text = "Delete Sample"
+
+[[string]]
+id = "ui.btn.load"
+text = "Load"
+
+[[string]]
+id = "ui.btn.next"
+text = "Next >"
+
+[[string]]
+id = "ui.btn.prev"
+text = "< Prev"
+
+[[string]]
+id = "ui.btn.refresh"
+text = "Refresh"
+
+[[string]]
+id = "ui.continue.hint"
+text = "Uses the dataset and settings on the left."
+
+[[string]]
+id = "ui.datasets.title"
+text = "Datasets"
+
+[[string]]
+id = "ui.draw.title"
+text = "Draw a Digit"
+
+[[string]]
+id = "ui.epochs"
+text = "Epochs:"
+
+[[string]]
+id = "ui.ideal.title"
+text = "Ideal Digits"
+
+[[string]]
+id = "ui.last.title"
+text = "Last Training"
+
+[[string]]
+id = "ui.layers"
+text = "Layers:"
+
+[[string]]
+id = "ui.loaded.title"
+text = "Loaded Model"
+
+[[string]]
+id = "ui.models.title"
+text = "Models"
+
+[[string]]
+id = "ui.neurons"
+text = "Neurons:"
+
+[[string]]
+id = "ui.neurons.dream"
+text = "Dream"
+
+[[string]]
+id = "ui.neurons.hint"
+text = "The small picture is your drawing from the Recognize tab. Green bars show how strongly each neuron reacts to it."
+
+[[string]]
+id = "ui.neurons.title"
+text = "What Each Neuron Looks For"
+
+[[string]]
+id = "ui.neurons.weights"
+text = "Weights"
+
+[[string]]
+id = "ui.newdataset.title"
+text = "New Dataset"
+
+[[string]]
+id = "ui.newmodel.title"
+text = "New Model"
+
+[[string]]
+id = "ui.perdigit.title"
+text = "Per Digit (MNIST test)"
+
+[[string]]
+id = "ui.probs.title"
+text = "Class Probabilities"
+
+[[string]]
+id = "ui.saved.title"
+text = "Saved Models"
+
+[[string]]
+id = "ui.scale"
+text = "Random scale"
+
+[[string]]
+id = "ui.settings.title"
+text = "Training Settings"
+
+[[string]]
+id = "ui.shift"
+text = "Random shift"
+
+[[string]]
+id = "ui.tab.datasets"
+text = "Datasets"
+
+[[string]]
+id = "ui.tab.help"
+text = "Help"
+
+[[string]]
+id = "ui.tab.neurons"
+text = "Neurons"
+
+[[string]]
+id = "ui.tab.recognize"
+text = "Recognize"
+
+[[string]]
+id = "ui.tab.train"
+text = "Train"
+
+[[string]]
+id = "ui.train.title"
+text = "Training"
+
+[[string]]
+id = "ui.yourdatasets"
+text = "Your Datasets"

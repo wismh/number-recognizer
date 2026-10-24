@@ -1,0 +1,47 @@
+<Stack class="h-topic-body" direction="vertical">
+    <Label class="h-kicker" text="{tr help.softmax.kicker}"/>
+    <Label class="h-title" text="{tr help.softmax.title}"/>
+    <Label class="h-head" text="{tr help.h.idea}"/>
+    <Label class="h-p" text="{tr help.softmax.p1}"/>
+    <Stack class="h-figure" direction="vertical">
+        <Component class="h-diagram dg-250" paint="{binding diagram1}"/>
+        <Label class="h-caption" text="{tr help.softmax.fig2}"/>
+    </Stack>
+    <Label class="h-head" text="{tr help.h.formulas}"/>
+    <Stack class="h-formula" direction="vertical">
+        <Math class="h-math" display="true" formula="p_k = \frac{e^{s_k}}{\sum_{j=0}^{9} e^{s_j}}"/>
+    </Stack>
+    <Label class="h-p" text="{tr help.softmax.p3}"/>
+    <Label class="h-head" text="{tr help.h.legend}"/>
+    <Stack class="h-legend" direction="vertical">
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="p_k"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.softmax.legend4}"/>
+        </Stack>
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="s_k"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.softmax.legend5}"/>
+        </Stack>
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="e"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.softmax.legend6}"/>
+        </Stack>
+    </Stack>
+    <Stack class="h-note" direction="vertical">
+        <Label class="h-note-text" text="{tr help.softmax.note7}"/>
+        <Math class="h-note-math" formula="p = \left( \frac{7.39}{11.11}, \; \frac{2.72}{11.11}, \; \frac{1}{11.11} \right) \approx (0.67, \; 0.24, \; 0.09)"/>
+    </Stack>
+    <Label class="h-head" text="{tr help.h.faq}"/>
+    <Stack class="h-faq" direction="vertical">
+        <Stack class="h-qa" direction="vertical">
+            <Label class="h-q" text="{tr help.softmax.q8}"/>
+            <Label class="h-a" text="{tr help.softmax.a9}"/>
+        </Stack>
+    </Stack>
+</Stack>

@@ -1,0 +1,3 @@
+name = "number-recognizer"
+engine = "0.2.10a"
+target = "number-recognizer"

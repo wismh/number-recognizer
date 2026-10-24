@@ -1,0 +1,59 @@
+<Stack class="h-topic-body" direction="vertical">
+    <Label class="h-kicker" text="{tr help.hidden.kicker}"/>
+    <Label class="h-title" text="{tr help.hidden.title}"/>
+    <Label class="h-head" text="{tr help.h.idea}"/>
+    <Label class="h-p" text="{tr help.hidden.p1}"/>
+    <Stack class="h-figure" direction="vertical">
+        <Component class="h-diagram dg-270" paint="{binding diagram1}"/>
+        <Label class="h-caption" text="{tr help.hidden.fig2}"/>
+    </Stack>
+    <Label class="h-head" text="{tr help.h.formulas}"/>
+    <Stack class="h-formula" direction="vertical">
+        <Math class="h-math" display="true" formula="h_j = \max\left( 0, \; \sum_{i} w^{(1)}_{ji} \, x_i + b^{(1)}_j \right)"/>
+        <Math class="h-math" display="true" formula="s_k = \sum_{j} w^{(2)}_{kj} \, h_j + b^{(2)}_k"/>
+    </Stack>
+    <Label class="h-p" text="{tr help.hidden.p3}"/>
+    <Stack class="h-figure" direction="vertical">
+        <Component class="h-diagram dg-210" paint="{binding diagram2}"/>
+        <Label class="h-caption" text="{tr help.hidden.fig4}"/>
+    </Stack>
+    <Stack class="h-formula" direction="vertical">
+        <Math class="h-math" display="true" formula="W_2 \, (W_1 x + b_1) + b_2 = (W_2 W_1) \, x + (W_2 b_1 + b_2)"/>
+    </Stack>
+    <Label class="h-p" text="{tr help.hidden.p5}"/>
+    <Label class="h-head" text="{tr help.h.legend}"/>
+    <Stack class="h-legend" direction="vertical">
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="h_j"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.hidden.legend6}"/>
+        </Stack>
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="w^{(1)},\, b^{(1)}"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.hidden.legend7}"/>
+        </Stack>
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="w^{(2)},\, b^{(2)}"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.hidden.legend8}"/>
+        </Stack>
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="\max(0, z)"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.hidden.legend9}"/>
+        </Stack>
+    </Stack>
+    <Label class="h-head" text="{tr help.h.faq}"/>
+    <Stack class="h-faq" direction="vertical">
+        <Stack class="h-qa" direction="vertical">
+            <Label class="h-q" text="{tr help.hidden.q10}"/>
+            <Label class="h-a" text="{tr help.hidden.a11}"/>
+        </Stack>
+    </Stack>
+    <Button class="h-try" content="{tr help.hidden.try}" command="{binding tryIt}"/>
+</Stack>

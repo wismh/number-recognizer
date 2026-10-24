@@ -1,0 +1,22 @@
+<Stack class="h-topic-body" direction="vertical">
+    <Label class="h-kicker" text="{tr help.metrics.kicker}"/>
+    <Label class="h-title" text="{tr help.metrics.title}"/>
+    <Label class="h-head" text="{tr help.h.idea}"/>
+    <Label class="h-p" text="{tr help.metrics.p1}"/>
+    <Label class="h-head" text="{tr help.h.formulas}"/>
+    <Stack class="h-formula" direction="vertical">
+        <Math class="h-math" display="true" formula="\mathrm{error}_k = \frac{\mathrm{wrong\;answers\;for\;digit\;}k}{\mathrm{all\;test\;pictures\;of\;digit\;}k}"/>
+    </Stack>
+    <Label class="h-p" text="{tr help.metrics.p2}"/>
+    <Label class="h-p" text="{tr help.metrics.p3}"/>
+    <Stack class="h-note" direction="vertical">
+        <Label class="h-note-text" text="{tr help.metrics.note4}"/>
+    </Stack>
+    <Label class="h-head" text="{tr help.h.faq}"/>
+    <Stack class="h-faq" direction="vertical">
+        <Stack class="h-qa" direction="vertical">
+            <Label class="h-q" text="{tr help.metrics.q5}"/>
+            <Label class="h-a" text="{tr help.metrics.a6}"/>
+        </Stack>
+    </Stack>
+</Stack>

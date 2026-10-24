@@ -1,0 +1,68 @@
+<Stack class="h-topic-body" direction="vertical">
+    <Label class="h-kicker" text="{tr help.linear.kicker}"/>
+    <Label class="h-title" text="{tr help.linear.title}"/>
+    <Label class="h-head" text="{tr help.h.idea}"/>
+    <Label class="h-p" text="{tr help.linear.p1}"/>
+    <Stack class="h-figure" direction="vertical">
+        <Component class="h-diagram dg-230" paint="{binding diagram1}"/>
+        <Stack class="h-sliders" direction="vertical">
+            <Stack class="h-slider-row" direction="horizontal">
+                <Stack class="h-sym" direction="vertical">
+                    <Math class="h-sym-math" formula="w"/>
+                </Stack>
+                <Slider class="h-slider" value="{binding lineW}" min="-1" max="2" step="0.1"/>
+            </Stack>
+            <Stack class="h-slider-row" direction="horizontal">
+                <Stack class="h-sym" direction="vertical">
+                    <Math class="h-sym-math" formula="b"/>
+                </Stack>
+                <Slider class="h-slider" value="{binding lineB}" min="-1" max="4" step="0.5"/>
+            </Stack>
+        </Stack>
+        <Label class="h-caption" text="{tr help.linear.fig2}"/>
+    </Stack>
+    <Label class="h-p" text="{tr help.linear.p3}"/>
+    <Label class="h-head" text="{tr help.h.formulas}"/>
+    <Stack class="h-formula" direction="vertical">
+        <Math class="h-math" display="true" formula="y = w \, x + b"/>
+    </Stack>
+    <Label class="h-head" text="{tr help.h.legend}"/>
+    <Stack class="h-legend" direction="vertical">
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="x"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.linear.legend4}"/>
+        </Stack>
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="y"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.linear.legend5}"/>
+        </Stack>
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="w"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.linear.legend6}"/>
+        </Stack>
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="b"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.linear.legend7}"/>
+        </Stack>
+    </Stack>
+    <Stack class="h-note" direction="vertical">
+        <Label class="h-note-text" text="{tr help.linear.note8}"/>
+        <Math class="h-note-math" formula="y = 0.5 \cdot 4 + 1 = 3"/>
+    </Stack>
+    <Label class="h-p" text="{tr help.linear.p9}"/>
+    <Label class="h-head" text="{tr help.h.faq}"/>
+    <Stack class="h-faq" direction="vertical">
+        <Stack class="h-qa" direction="vertical">
+            <Label class="h-q" text="{tr help.linear.q10}"/>
+            <Label class="h-a" text="{tr help.linear.a11}"/>
+        </Stack>
+    </Stack>
+</Stack>

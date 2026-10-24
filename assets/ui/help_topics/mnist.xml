@@ -1,0 +1,25 @@
+<Stack class="h-topic-body" direction="vertical">
+    <Label class="h-kicker" text="{tr help.mnist.kicker}"/>
+    <Label class="h-title" text="{tr help.mnist.title}"/>
+    <Label class="h-head" text="{tr help.h.idea}"/>
+    <Label class="h-p" text="{tr help.mnist.p1}"/>
+    <Stack class="h-figure" direction="vertical">
+        <Component class="h-diagram dg-230" paint="{binding diagram1}"/>
+        <Label class="h-caption" text="{tr help.mnist.fig2}"/>
+    </Stack>
+    <Label class="h-head" text="{tr help.h.formulas}"/>
+    <Stack class="h-formula" direction="vertical">
+        <Math class="h-math" display="true" formula="\mathrm{accuracy} = \frac{\mathrm{correct\;answers}}{\mathrm{all\;pictures}}"/>
+    </Stack>
+    <Label class="h-p" text="{tr help.mnist.p3}"/>
+    <Stack class="h-note" direction="vertical">
+        <Label class="h-note-text" text="{tr help.mnist.note4}"/>
+    </Stack>
+    <Label class="h-head" text="{tr help.h.faq}"/>
+    <Stack class="h-faq" direction="vertical">
+        <Stack class="h-qa" direction="vertical">
+            <Label class="h-q" text="{tr help.mnist.q5}"/>
+            <Label class="h-a" text="{tr help.mnist.a6}"/>
+        </Stack>
+    </Stack>
+</Stack>

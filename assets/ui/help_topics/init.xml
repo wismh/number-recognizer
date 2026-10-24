@@ -1,0 +1,33 @@
+<Stack class="h-topic-body" direction="vertical">
+    <Label class="h-kicker" text="{tr help.init.kicker}"/>
+    <Label class="h-title" text="{tr help.init.title}"/>
+    <Label class="h-head" text="{tr help.h.idea}"/>
+    <Label class="h-p" text="{tr help.init.p1}"/>
+    <Label class="h-head" text="{tr help.h.formulas}"/>
+    <Stack class="h-formula" direction="vertical">
+        <Math class="h-math" display="true" formula="w \sim N\left( 0, \; \sigma^2 \right), \qquad \sigma = \sqrt{\frac{2}{n_{\mathrm{in}}}}"/>
+    </Stack>
+    <Label class="h-p" text="{tr help.init.p2}"/>
+    <Label class="h-head" text="{tr help.h.legend}"/>
+    <Stack class="h-legend" direction="vertical">
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="N(0, \sigma^2)"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.init.legend3}"/>
+        </Stack>
+        <Stack class="h-legend-row" direction="horizontal">
+            <Stack class="h-sym" direction="vertical">
+                <Math class="h-sym-math" formula="n_{\mathrm{in}}"/>
+            </Stack>
+            <Label class="h-legend-text" text="{tr help.init.legend4}"/>
+        </Stack>
+    </Stack>
+    <Label class="h-head" text="{tr help.h.faq}"/>
+    <Stack class="h-faq" direction="vertical">
+        <Stack class="h-qa" direction="vertical">
+            <Label class="h-q" text="{tr help.init.q5}"/>
+            <Label class="h-a" text="{tr help.init.a6}"/>
+        </Stack>
+    </Stack>
+</Stack>
