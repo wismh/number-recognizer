@@ -8,19 +8,24 @@
 namespace game {
 
 TrainingRun::TrainingRun(Mlp model, std::shared_ptr<const LabeledImages> samples, unsigned epochs,
-        Augmentation augmentation, Parallel parallel)
+        Augmentation augmentation, Parallel parallel, std::uint32_t seed)
     : model_(std::move(model))
     , samples_(std::move(samples))
     , epochs_(epochs)
     , augmentation_(augmentation)
     , parallel_(std::move(parallel))
-    , order_(samples_->size()) {
+    , order_(samples_->size())
+    , rng_(seed) {
     std::iota(order_.begin(), order_.end(), std::size_t{0});
     std::ranges::shuffle(order_, rng_);
     shift_seed_ = rng_();
 }
 
 bool TrainingRun::step(std::chrono::steady_clock::duration budget) {
+    if (order_.empty()) {
+        completed_epochs_ = epochs_;  // nothing to learn from
+        return true;
+    }
     const auto deadline = std::chrono::steady_clock::now() + budget;
     do {
         if (completed_epochs_ >= epochs_) {
@@ -35,7 +40,7 @@ bool TrainingRun::step(std::chrono::steady_clock::duration budget) {
 }
 
 float TrainingRun::epoch_progress() const {
-    return static_cast<float>(cursor_) / static_cast<float>(order_.size());
+    return order_.empty() ? 0.0f : static_cast<float>(cursor_) / static_cast<float>(order_.size());
 }
 
 void TrainingRun::run_batch() {

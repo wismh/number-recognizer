@@ -37,9 +37,17 @@ std::expected<std::vector<std::uint8_t>, std::string> read_idx(
     if (expected_magic == kImagesMagic) {
         std::uint32_t rows = 0;
         std::uint32_t cols = 0;
-        if (!read_be32(in, rows) || !read_be32(in, cols) || rows * cols != item_size) {
+        if (!read_be32(in, rows) || !read_be32(in, cols) || std::uint64_t{rows} * cols != item_size) {
             return std::unexpected(std::format("unexpected image size: {}", path.string()));
         }
+    }
+
+    // The count must agree with the file, or a damaged one would ask for gigabytes.
+    const std::uintmax_t header = expected_magic == kImagesMagic ? 16 : 8;
+    std::error_code size_error;
+    const std::uintmax_t file_size = std::filesystem::file_size(path, size_error);
+    if (size_error || file_size != header + std::uintmax_t{count} * item_size) {
+        return std::unexpected(std::format("truncated IDX file: {}", path.string()));
     }
 
     std::vector<std::uint8_t> data(static_cast<std::size_t>(count) * item_size);
@@ -61,6 +69,10 @@ std::expected<MnistData, std::string> MnistData::load(const std::filesystem::pat
         if (!*part) {
             return std::unexpected(part->error());
         }
+    }
+    if (train_images->size() / kImageSize != train_labels->size()
+            || test_images->size() / kImageSize != test_labels->size()) {
+        return std::unexpected("MNIST images and labels do not match in number");
     }
     data.train.images = std::move(*train_images);
     data.train.labels = std::move(*train_labels);

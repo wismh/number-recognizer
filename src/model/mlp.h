@@ -2,6 +2,7 @@
 
 #include "model/digits.h"
 
+#include <cstdint>
 #include <expected>
 #include <filesystem>
 #include <span>
@@ -15,6 +16,7 @@ namespace game {
 // `out` rows of `in` weights followed by `out` biases.
 class Mlp {
 public:
+    // What a model file may hold; the Train tab offers fewer.
     static constexpr std::size_t kMaxHiddenLayers = 8;
     static constexpr std::size_t kMaxNeurons = 1024;
 
@@ -25,8 +27,10 @@ public:
         std::vector<float> next_delta;
     };
 
-    // He-initialized weights, zero biases.
+    // He-initialized weights, zero biases. The same `seed` gives the same weights; the one-argument form picks a seed
+    // at random.
     explicit Mlp(std::vector<std::size_t> hidden);
+    Mlp(std::vector<std::size_t> hidden, std::uint32_t seed);
 
     [[nodiscard]] static std::expected<Mlp, std::string> load(const std::filesystem::path& path);
     [[nodiscard]] std::expected<void, std::string> save(const std::filesystem::path& path) const;
@@ -34,6 +38,9 @@ public:
     [[nodiscard]] const std::vector<std::size_t>& hidden() const { return hidden_; }
     // "784-64-64-10".
     [[nodiscard]] std::string describe() const;
+    // "linear", "<layers>x<neurons>" when all hidden layers are equal, else the sizes joined with dashes. Used in file
+    // names.
+    [[nodiscard]] std::string label() const;
     [[nodiscard]] std::size_t parameter_count() const { return params_.size(); }
     // Epochs of training this model has had in total, across Train and Continue; 0 when unknown (older files).
     [[nodiscard]] unsigned epochs_trained() const { return epochs_trained_; }

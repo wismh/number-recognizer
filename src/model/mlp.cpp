@@ -1,7 +1,8 @@
 #include "model/mlp.h"
 
+#include "model/binary_io.h"
+
 #include <algorithm>
-#include <bit>
 #include <cmath>
 #include <format>
 #include <fstream>
@@ -18,18 +19,6 @@ constexpr std::uint32_t kVersionLinear = 1;
 constexpr std::uint32_t kVersionHidden = 2;
 constexpr std::uint32_t kVersionEpochs = 3;
 
-static_assert(std::endian::native == std::endian::little, "model files are little-endian");
-
-template<typename T>
-bool read_value(std::istream& in, T& value) {
-    return static_cast<bool>(in.read(reinterpret_cast<char*>(&value), sizeof(T)));
-}
-
-template<typename T>
-void write_value(std::ostream& out, const T& value) {
-    out.write(reinterpret_cast<const char*>(&value), sizeof(T));
-}
-
 }
 
 Mlp::Mlp(std::vector<std::size_t> hidden, NoInit)
@@ -38,8 +27,11 @@ Mlp::Mlp(std::vector<std::size_t> hidden, NoInit)
 }
 
 Mlp::Mlp(std::vector<std::size_t> hidden)
+    : Mlp(std::move(hidden), std::random_device{}()) {}
+
+Mlp::Mlp(std::vector<std::size_t> hidden, std::uint32_t seed)
     : Mlp(std::move(hidden), NoInit{}) {
-    std::mt19937 rng{std::random_device{}()};
+    std::mt19937 rng{seed};
     for (const Layer& layer : layers_) {
         std::normal_distribution<float> dist(0.0f, std::sqrt(2.0f / static_cast<float>(layer.in)));
         for (std::size_t i = 0; i < layer.in * layer.out; ++i) {
@@ -73,6 +65,20 @@ std::string Mlp::describe() const {
         text += std::format("-{}", size);
     }
     return text + std::format("-{}", kNumClasses);
+}
+
+std::string Mlp::label() const {
+    if (hidden_.empty()) {
+        return "linear";
+    }
+    if (std::ranges::all_of(hidden_, [&](std::size_t size) { return size == hidden_.front(); })) {
+        return std::format("{}x{}", hidden_.size(), hidden_.front());
+    }
+    std::string text;
+    for (const std::size_t size : hidden_) {
+        text += (text.empty() ? "" : "-") + std::to_string(size);
+    }
+    return text;
 }
 
 std::expected<Mlp, std::string> Mlp::load(const std::filesystem::path& path) {
@@ -136,23 +142,31 @@ std::expected<void, std::string> Mlp::save(const std::filesystem::path& path) co
         std::filesystem::create_directories(path.parent_path(), error);
     }
 
-    std::ofstream out(path, std::ios::binary);
-    if (!out) {
-        return std::unexpected(std::format("cannot write {}", path.string()));
+    // Written beside the final name and renamed, so a failed write never leaves half a model.
+    const std::filesystem::path temporary = path.string() + ".tmp";
+    {
+        std::ofstream out(temporary, std::ios::binary);
+        if (!out) {
+            return std::unexpected(std::format("cannot write {}", path.string()));
+        }
+        out.write(kMagic, sizeof(kMagic));
+        write_value(out, kVersionEpochs);
+        write_value(out, static_cast<std::uint32_t>(kImageSize));
+        write_value(out, static_cast<std::uint32_t>(kNumClasses));
+        write_value(out, static_cast<std::uint32_t>(hidden_.size()));
+        for (const std::size_t size : hidden_) {
+            write_value(out, static_cast<std::uint32_t>(size));
+        }
+        write_value(out, static_cast<std::uint32_t>(epochs_trained_));
+        out.write(reinterpret_cast<const char*>(params_.data()),
+                static_cast<std::streamsize>(params_.size() * sizeof(float)));
+        if (!out) {
+            return std::unexpected(std::format("write failed: {}", path.string()));
+        }
     }
-    out.write(kMagic, sizeof(kMagic));
-    write_value(out, kVersionEpochs);
-    write_value(out, static_cast<std::uint32_t>(kImageSize));
-    write_value(out, static_cast<std::uint32_t>(kNumClasses));
-    write_value(out, static_cast<std::uint32_t>(hidden_.size()));
-    for (const std::size_t size : hidden_) {
-        write_value(out, static_cast<std::uint32_t>(size));
-    }
-    write_value(out, static_cast<std::uint32_t>(epochs_trained_));
-    out.write(reinterpret_cast<const char*>(params_.data()),
-            static_cast<std::streamsize>(params_.size() * sizeof(float)));
-    if (!out) {
-        return std::unexpected(std::format("write failed: {}", path.string()));
+    std::filesystem::rename(temporary, path, error);
+    if (error) {
+        return std::unexpected(std::format("cannot replace {}: {}", path.string(), error.message()));
     }
     return {};
 }

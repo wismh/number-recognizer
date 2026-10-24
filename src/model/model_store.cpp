@@ -1,6 +1,8 @@
 #include "model/model_store.h"
 
 #include <algorithm>
+#include <charconv>
+#include <cctype>
 #include <chrono>
 #include <format>
 
@@ -25,12 +27,26 @@ std::vector<std::string> ModelStore::list() const {
 }
 
 std::filesystem::path ModelStore::path_for(const std::string& name) const {
-    return directory_ / name;
+    return directory_ / std::filesystem::path(name).filename();
 }
 
 bool ModelStore::remove(const std::string& name) const {
     std::error_code error;
-    return available() && std::filesystem::remove(directory_ / name, error);
+    return available() && std::filesystem::remove(path_for(name), error);
+}
+
+unsigned ModelStore::epochs_in_name(const std::string& name) {
+    const std::size_t end = name.find("ep_");
+    if (end == std::string::npos) {
+        return 0;
+    }
+    std::size_t begin = end;
+    while (begin > 0 && std::isdigit(static_cast<unsigned char>(name[begin - 1]))) {
+        --begin;
+    }
+    unsigned epochs = 0;
+    const auto [last, error] = std::from_chars(name.data() + begin, name.data() + end, epochs);
+    return error == std::errc{} && last == name.data() + end ? epochs : 0;
 }
 
 std::string ModelStore::new_file_name(const std::string& architecture, unsigned epochs) {

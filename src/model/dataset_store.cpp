@@ -1,7 +1,8 @@
 #include "model/dataset_store.h"
 
+#include "model/binary_io.h"
+
 #include <algorithm>
-#include <bit>
 #include <cctype>
 #include <format>
 #include <fstream>
@@ -13,8 +14,6 @@ namespace {
 constexpr char kMagic[4] = {'N', 'R', 'D', 'S'};
 constexpr std::uint32_t kVersion = 1;
 constexpr const char* kExtension = ".dset";
-
-static_assert(std::endian::native == std::endian::little, "dataset files are little-endian");
 
 }
 
@@ -50,10 +49,17 @@ std::expected<LabeledImages, std::string> DatasetStore::load(const std::string& 
     std::uint32_t version = 0;
     std::uint32_t count = 0;
     in.read(magic, sizeof(magic));
-    in.read(reinterpret_cast<char*>(&version), sizeof(version));
-    in.read(reinterpret_cast<char*>(&count), sizeof(count));
-    if (!in || !std::equal(std::begin(magic), std::end(magic), std::begin(kMagic)) || version != kVersion) {
+    if (!in || !read_value(in, version) || !read_value(in, count)
+            || !std::equal(std::begin(magic), std::end(magic), std::begin(kMagic)) || version != kVersion) {
         return std::unexpected(std::format("{} is not a dataset file", name));
+    }
+
+    // The header must agree with the file, or a damaged count would ask for gigabytes.
+    std::error_code size_error;
+    const std::uintmax_t file_size = std::filesystem::file_size(path_for(name), size_error);
+    constexpr std::uintmax_t kHeader = sizeof(kMagic) + 2 * sizeof(std::uint32_t);
+    if (size_error || file_size != kHeader + std::uintmax_t{count} * (1 + kImageSize)) {
+        return std::unexpected(std::format("dataset {} is damaged", name));
     }
 
     LabeledImages data;
@@ -87,8 +93,8 @@ std::expected<void, std::string> DatasetStore::save(const std::string& name, con
         }
         const auto count = static_cast<std::uint32_t>(data.size());
         out.write(kMagic, sizeof(kMagic));
-        out.write(reinterpret_cast<const char*>(&kVersion), sizeof(kVersion));
-        out.write(reinterpret_cast<const char*>(&count), sizeof(count));
+        write_value(out, kVersion);
+        write_value(out, count);
         for (std::size_t i = 0; i < data.size(); ++i) {
             out.write(reinterpret_cast<const char*>(&data.labels[i]), 1);
             out.write(reinterpret_cast<const char*>(data.images.data() + i * kImageSize),

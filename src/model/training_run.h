@@ -20,8 +20,9 @@ public:
     static constexpr std::size_t kBatchSize = 32;
     static constexpr float kLearningRate = 0.1f;
 
+    // The same `seed` gives the same order of samples and the same changes to them.
     TrainingRun(Mlp model, std::shared_ptr<const LabeledImages> samples, unsigned epochs, Augmentation augmentation,
-            Parallel parallel);
+            Parallel parallel, std::uint32_t seed = std::random_device{}());
 
     // Trains for about `budget` (at least one batch). Returns true once every epoch is done.
     bool step(std::chrono::steady_clock::duration budget);
@@ -53,7 +54,7 @@ private:
     std::vector<double> range_losses_;
     double epoch_loss_sum_ = 0.0;
     std::uint64_t shift_seed_ = 0;  // new every epoch
-    std::mt19937 rng_{std::random_device{}()};
+    std::mt19937 rng_;
 };
 
 }
