@@ -1,0 +1,124 @@
+name: Release
+
+# Builds the game with the Wind SDK named by `engine` in wind_project.toml (setup-wind downloads it, nothing is built
+# from the engine source) on Windows, Linux, and macOS, exports it with `wind_editor --batch --export`, and packs it.
+# A tag v<version> publishes a GitHub Release with the three archives and their .sha256; a push to main, a pull
+# request, and a manual run only build (the archives are uploaded as workflow artifacts).
+#   git tag v0.1.0 && git push origin v0.1.0
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: Windows, runner: windows-2025-vs2026, os: windows, arch: x86_64 }
+          - { name: Linux, runner: ubuntu-24.04, os: linux, arch: x86_64 }
+          - { name: macOS, runner: macos-14, os: macos, arch: arm64 }
+    env:
+      # A CI machine has no sound card.
+      SDL_AUDIODRIVER: dummy
+      GAME: number-recognizer
+    steps:
+      - uses: actions/checkout@v4
+      - name: Packages
+        if: matrix.os == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ninja-build \
+            libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxfixes-dev libxi-dev libxss-dev libxtst-dev \
+            libxkbcommon-dev libwayland-dev libdecor-0-dev libdrm-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev \
+            libegl1-mesa-dev libasound2-dev libpulse-dev libudev-dev libdbus-1-dev libibus-1.0-dev
+      - name: Packages
+        if: matrix.os == 'macos'
+        run: brew install ninja
+      - uses: wismh/wind-engine/.github/actions/setup-wind@main
+      - name: Export (Linux, macOS)
+        if: matrix.os != 'windows'
+        shell: bash
+        run: |
+          wind_editor --batch --project "$PWD" --export "$PWD/export" --log-file export.log \
+            || { code=$?; cat export.log; echo "export exit code ${code}"; exit 1; }
+          tail -n 5 export.log
+      - name: Export (Windows)
+        if: matrix.os == 'windows'
+        shell: pwsh
+        run: |
+          # wind_editor.exe is a GUI-subsystem program: wait for it and read its log file.
+          $out = Join-Path $PWD 'export'
+          $log = Join-Path $PWD 'export.log'
+          $p = Start-Process -Wait -PassThru -FilePath "$env:WIND_SDK_DIR\bin\wind_editor.exe" `
+            -ArgumentList '--batch', '--project', $PWD.Path, '--export', $out, '--log-file', $log
+          Get-Content $log | Select-Object -Last 40
+          if ($p.ExitCode -ne 0) { throw "export exit code $($p.ExitCode)" }
+      - name: Pack
+        shell: bash
+        run: |
+          name="${GAME}-${{ github.ref_type == 'tag' && github.ref_name || github.sha }}-${{ matrix.os }}-${{ matrix.arch }}"
+          find export -name '*.pdb' -delete
+          test -n "$(ls -A export)" || { echo "empty export"; exit 1; }
+          rm -rf "pack" && mkdir -p pack dist
+          mv export "pack/${name}"
+          if [ "${{ matrix.os }}" = "windows" ]; then
+            file="${name}.zip"
+            (cd pack && cmake -E tar cf "../dist/${file}" --format=zip "${name}")
+          else
+            file="${name}.tar.gz"
+            tar -C pack -czf "dist/${file}" "${name}"
+          fi
+          (cd dist && cmake -E sha256sum "${file}" > "${file}.sha256")
+          ls -l dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.GAME }}-${{ matrix.os }}-${{ matrix.arch }}
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: export-log-${{ matrix.os }}
+          path: export.log
+          if-no-files-found: ignore
+          retention-days: 7
+
+  publish:
+    name: Publish ${{ github.ref_name }}
+    needs: export
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: number-recognizer-*
+          merge-multiple: true
+          path: dist
+      - name: Release
+        run: |
+          ls -l dist
+          test "$(ls dist/*.sha256 | wc -l)" = 3
+          test "$(ls dist | wc -l)" = 6
+          gh release create "${{ github.ref_name }}" dist/* --repo "${{ github.repository }}" \
+            --title "Number Recognizer ${{ github.ref_name }}" --generate-notes
