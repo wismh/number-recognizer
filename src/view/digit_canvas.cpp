@@ -8,7 +8,7 @@ namespace game {
 void DigitCanvas::paint(engine::ui::IDrawList& list, const engine::render::Rect& content) {
     list.fill_rect(content, {0.0f, 0.0f, 0.0f, 1.0f});
 
-    constexpr int kSide = 28;
+    constexpr int kSide = static_cast<int>(kImageWidth);
     const float cell_w = content.w / kSide;
     const float cell_h = content.h / kSide;
     for (int y = 0; y < kSide; ++y) {
@@ -29,7 +29,7 @@ void DigitCanvas::clear() {
 }
 
 void DigitCanvas::stamp(float nx, float ny) {
-    constexpr int kSide = 28;
+    constexpr int kSide = static_cast<int>(kImageWidth);
     // Pointer position in pixel-centre coordinates (pixel i is centred on i), so the brush can sit between pixels.
     const float cx = std::clamp(nx * kSide - 0.5f, 0.0f, kSide - 1.0f);
     const float cy = std::clamp(ny * kSide - 0.5f, 0.0f, kSide - 1.0f);

@@ -7,7 +7,7 @@ namespace game {
 
 namespace {
 
-constexpr int kSide = 28;
+constexpr int kSide = static_cast<int>(kImageWidth);
 
 struct Bounds {
     int min_x = kSide;

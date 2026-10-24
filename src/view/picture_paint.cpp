@@ -10,7 +10,7 @@ namespace game {
 
 namespace {
 
-constexpr int kSide = 28;
+constexpr int kSide = static_cast<int>(kImageWidth);
 constexpr int kMeterSteps = 16;
 constexpr float kMeterHeight = 3.0f;
 // Weights this small next to the largest one are left black: they only make the picture noisy.

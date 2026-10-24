@@ -11,7 +11,7 @@ void GridCell::paint(engine::ui::IDrawList& list, const engine::render::Rect& co
         return;
     }
 
-    constexpr int kSide = 28;
+    constexpr int kSide = static_cast<int>(kImageWidth);
     const float pixel = content.w / kSide;
     list.fill_rect(content, {0.0f, 0.0f, 0.0f, 1.0f});
 

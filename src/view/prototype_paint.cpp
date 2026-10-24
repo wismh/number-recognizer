@@ -7,7 +7,7 @@
 namespace game {
 
 void PrototypePaint::paint(engine::ui::IDrawList& list, const engine::render::Rect& content) {
-    constexpr int kSide = 28;
+    constexpr int kSide = static_cast<int>(kImageWidth);
     constexpr float kPixel = kImageSide / kSide;
     const glm::vec4 label_color{0.12f, 0.16f, 0.23f, 1.0f};
     const glm::vec4 empty_color{0.0f, 0.0f, 0.0f, 1.0f};

@@ -15,11 +15,22 @@ namespace game {
 
 namespace {
 
+// A stroke is stamped this many times per canvas pixel it crosses, so it stays connected.
+constexpr float kStampsPerPixel = 2.0f;
+
 constexpr glm::vec2 kDesignSize{920.0f, 640.0f};
 
 // The drawing area of recognizer.css (.draw-area), in design units: 16 padding, then the 44 tall tab bar, the 28 tall
 // title and a 12 gap above it, so it starts at y = 16 + 44 + 28 + 12.
 constexpr engine::render::Rect kDrawArea{16.0f, 100.0f, 280.0f, 280.0f};
+
+// The domain runs its loops on the engine's worker threads through this.
+Parallel parallel_over(engine::JobSystem& jobs) {
+    return Parallel{static_cast<std::size_t>(jobs.worker_count()) + 1,
+            [&jobs](std::size_t count, std::size_t grain, const Parallel::RangeFn& fn) {
+                jobs.parallel_for(count, grain, [&fn](std::size_t begin, std::size_t end) { fn(begin, end); });
+            }};
+}
 
 }
 
@@ -63,7 +74,7 @@ void Game::on_start() {
     view_->localeEn.bind_to<Game, &Game::use_english>(*this);
     view_->localeUk.bind_to<Game, &Game::use_ukrainian>(*this);
     recognizer_.emplace(*view_, *tr_, ModelStore{std::move(model_directory)},
-            DatasetStore{std::move(dataset_directory)}, std::move(data_directory), *jobs_);
+            DatasetStore{std::move(dataset_directory)}, std::move(data_directory), parallel_over(*jobs_));
     help_.emplace(*view_, *tr_);
 
     engine::ui::UiCanvas canvas;
@@ -116,7 +127,7 @@ void Game::on_frame(engine::ecs::World& world) {
         if (drawing_) {
             drawing_ = false;
             last_point_.reset();
-            recognizer_->end_stroke();
+            recognizer_->canvas_changed();
         }
         return;
     }
@@ -138,12 +149,14 @@ void Game::on_frame(engine::ecs::World& world) {
     // Fill the gap since the last frame so a fast stroke stays connected.
     const glm::vec2 point{(design->x - kDrawArea.x) / kDrawArea.w, (design->y - kDrawArea.y) / kDrawArea.h};
     const glm::vec2 from = last_point_.value_or(point);
-    const int steps = std::max(1, static_cast<int>(glm::length(point - from) * 28.0f * 2.0f));
+    const float crossed = glm::length(point - from) * static_cast<float>(kImageWidth);
+    const int steps = std::max(1, static_cast<int>(crossed * kStampsPerPixel));
     for (int i = 1; i <= steps; ++i) {
         const glm::vec2 p = from + (point - from) * (static_cast<float>(i) / static_cast<float>(steps));
         recognizer_->draw_at(p.x, p.y);
     }
     last_point_ = point;
+    recognizer_->canvas_changed();  // once per frame, not per stamp: the prediction costs a pass through the model
 }
 
 std::optional<glm::vec2> Game::to_design(engine::ecs::World& world, glm::vec2 window_position) const {

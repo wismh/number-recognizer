@@ -12,10 +12,6 @@ namespace {
 
 const std::string kMnistName = "MNIST";
 
-bool is_blank(const Pixels& pixels) {
-    return std::ranges::all_of(pixels, [](std::uint8_t value) { return value == 0; });
-}
-
 }
 
 DatasetManager::DatasetManager(RecognizerViewModel& view, DatasetStore store, const Tr& tr, StatusLine& status)

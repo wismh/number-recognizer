@@ -22,7 +22,7 @@ constexpr float kStartNoise = 0.1f;
 constexpr float kBlur = 0.15f;
 
 void blur(std::vector<float>& image) {
-    constexpr int kSide = 28;
+    constexpr int kSide = static_cast<int>(kImageWidth);
     const std::vector<float> source = image;
     for (int y = 0; y < kSide; ++y) {
         for (int x = 0; x < kSide; ++x) {

@@ -7,7 +7,7 @@ namespace game {
 
 namespace {
 
-constexpr int kSide = 28;
+constexpr int kSide = static_cast<int>(kImageWidth);
 constexpr float kDigitSize = 20.0f;
 constexpr float kCentre = 14.0f;
 
