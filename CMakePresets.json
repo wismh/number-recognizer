@@ -16,5 +16,13 @@
       },
       "cacheVariables": { "CMAKE_CONFIGURATION_TYPES": "DebugGame;Release" }
     }
+    ,
+    {
+      "name": "tests",
+      "displayName": "Unit tests of the domain (Ninja Multi-Config); pass CMAKE_PREFIX_PATH of a Wind SDK",
+      "inherits": "editor",
+      "binaryDir": "${sourceDir}/build-tests",
+      "cacheVariables": { "NUMBER_RECOGNIZER_TESTS": "ON" }
+    }
   ]
 }
